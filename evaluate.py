@@ -1,6 +1,7 @@
 import json
 import time
 from classifier import classify_ticket
+import argparse
 
 
 def load_examples(path):
@@ -56,7 +57,10 @@ def print_report(results):
             print(f"expected: {result['expected']}, got {result['predicted']}: {result['text']}")
 
 def main():
-    examples = load_examples("examples.json")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("test_file", help="Path to a JSON file with labeled tickets")
+    args = parser.parse_args()
+    examples = load_examples(args.test_file)
     results = evaluate(examples)
     print_report(results)
 
