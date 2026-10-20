@@ -11,7 +11,13 @@ client = Groq(api_key=os.getenv("API_KEY"))
 MODEL = "openai/gpt-oss-20b"
 
 def ask_model(system_prompt, user_text):
-    """ функция която ...."""
+    """
+    Sends one request to the model and returns its answer as text.
+
+    system_prompt: instructions for how the model should behave.
+    user_text: the text the model should work on.
+    Each call is independent: the model does not remember earlier requests.
+    """
     response = client.chat.completions.create(
         model = MODEL,
         messages=[
